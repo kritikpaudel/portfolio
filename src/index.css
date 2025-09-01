@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   Design tokens
+   ========================= */
+:root {
+  --bg: #0B0D12;
+  --surface: #0F1218;
+  --muted: #9aa4b2;
+  --text: #E6E8EC;
+  --primary: #7C5CFC;
+  --accent: #23D5AB;
+  --ring: rgba(124, 92, 252, 0.4);
+}
+
+/* =========================
+   Base dark foundation
+   ========================= */
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* =========================
+   Typography + base utilities
+   ========================= */
+@layer base {
+  /* If Lenis feels "double easing", remove the next line */
+  * { @apply scroll-smooth; }
+
+  h1 { @apply text-4xl md:text-6xl font-semibold tracking-tight; }
+  h2 { @apply text-3xl md:text-4xl font-semibold tracking-tight; }
+  h3 { @apply text-2xl md:text-3xl font-medium tracking-tight; }
+  p  { @apply text-base leading-7 text-gray-300; }
+}
+
+/* =========================
+   Components
+   ========================= */
+@layer components {
+  /* Subtle glass */
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
+    border-radius: 16px;
+  }
+
+  /* Stronger, more-opaque glass (for nav/menu) */
+  .glass-solid {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 24, 32, 0.90),
+      rgba(14, 17, 23, 0.86)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px) saturate(120%);
+    border-radius: 16px;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-2xl border border-white/10 hover:border-white/20 transition;
+    background: radial-gradient(120% 120% at 50% 0%, rgba(124,92,252,.18), rgba(124,92,252,.08) 40%, rgba(255,255,255,.02) 100%);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .menu-link {
+    @apply px-3 py-2 rounded-xl text-gray-200;
+    background: transparent;
+    transition: background-color 160ms ease;
+  }
+  .menu-link:hover { background: rgba(255, 255, 255, 0.10); }
+  .menu-link:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .container-pad { @apply max-w-6xl mx-auto px-4 md:px-6; }
+}
+
+/* =========================
+   Preloader
+   ========================= */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(124,92,252,.12), transparent 60%) , var(--bg);
+}
+.logo-pulse {
+  width: 48px; height: 48px; border-radius: 12px; position: relative;
+  background: conic-gradient(from 0deg, var(--primary), var(--accent), var(--primary));
+  animation: spin 1.5s linear infinite;
+}
+.logo-pulse::after {
+  content: ""; position: absolute; inset: 6px; border-radius: 8px; background: var(--surface);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =========================
+   Typewriter caret
+   ========================= */
+.type-caret {
+  display: inline-block;
+  width: 1ch;
+  border-right: 2px solid rgba(230,232,236,0.6);
+  transform: translateY(1px);
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+@keyframes caret-blink {
+  50% { border-color: transparent; }
+}
+
+/* =========================
+   Custom Scrollbar (modern)
+   ========================= */
+:root {
+  /* thumb + track colors tuned for your dark palette */
+  --scrollbar-track: #0B0D12;
+  --scrollbar-thumb: rgba(230,232,236,0.16);
+  --scrollbar-thumb-hover: rgba(230,232,236,0.28);
+  --scrollbar-corner: #0B0D12;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit (Chromium/Safari) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--scrollbar-thumb-hover); }
+*::-webkit-scrollbar-corner { background: var(--scrollbar-corner); }
+
+/* =========================
+   Performance & UX helpers
+   ========================= */
+/* crisper edges during GPU transforms */
+.tilt-smooth {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* disable selection globally, but allow forms */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+input, textarea, [contenteditable], .allow-select {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  user-select: text !important;
+}
+
+/* stop image dragging & long-press save on iOS */
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* optional: make text selection invisible (still selectable in inputs) */
+/*
+::selection { background: transparent; }
+*/
