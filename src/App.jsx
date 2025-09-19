@@ -12,6 +12,9 @@ import ContactForm from "./components/ContactForm";
 import { GraduationCap, Briefcase } from "lucide-react";
 import UnderDevelopment from "./components/UnderDevelopment";
 import { fadeIn, stagger, scaleIn } from "./lib/motion";
+import CursorSpotlight from "./components/CursorSpotlight";
+import Magnetic from "./components/Magnetic";
+
 
 function LenisProvider({ children }) {
   useLenis();
@@ -26,7 +29,7 @@ export default function App() {
         <Nav />
 
         {/* HERO */}
-        <section d="home" className="container-pad pt-28 md:pt-36 pb-10">
+        <section id="home" className="container-pad pt-28 md:pt-36 pb-10">
           <motion.div
             variants={stagger(0.08, 0)}
             initial="hidden"
@@ -39,8 +42,8 @@ export default function App() {
                 A passionate Web Developer and Cybersecurity Enthusiast.
               </p>
               <div className="mt-6 flex gap-3">
-                <a className="btn" href="#work">View Work</a>
-                <a className="btn" href="#contact">Contact</a>
+                <Magnetic><a className="btn" href="#work">View Work</a></Magnetic>
+                <Magnetic><a className="btn" href="#contact">Contact</a></Magnetic>
               </div>
             </motion.div>
 
@@ -57,10 +60,7 @@ export default function App() {
           </motion.div>
         </section>
 
-        {/* WORK */}
-        <Section id="work" title="Work" subtitle="Selected projects & experiments">
-          <UnderDevelopment />
-        </Section>
+        
 
 
 
@@ -129,7 +129,10 @@ export default function App() {
           </div>
         </Section>
 
-
+        {/* WORK */}
+        <Section id="work" title="Work" subtitle="Selected projects & experiments">
+          <UnderDevelopment />
+        </Section>
 
         {/* CONTACT */}
         <Section id="contact" title="Contact" subtitle="Let’s get connected">

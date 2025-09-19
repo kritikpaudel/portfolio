@@ -3,17 +3,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import IconButton from "./IconButton";
 import { Instagram, Linkedin, Mail, Menu, X } from "lucide-react";
 import Typewriter from "./Typewriter";
+import useActiveSection from "../hooks/useActiveSection";
 
 const links = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
+  { href: "#home", label: "Home", id: "home" },
+  { href: "#about", label: "About", id: "about" },
+  { href: "#work", label: "Work", id: "work" },
+  { href: "#contact", label: "Contact", id: "contact" },
 ];
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
+
+  // which section is active on screen
+  const activeId = useActiveSection(links.map(l => l.id));
 
   // lock scroll when open
   useEffect(() => {
@@ -44,7 +48,6 @@ export default function Nav() {
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
       <div className="container-pad">
-        {/* stronger glass for readability */}
         <div className="glass-solid mt-4 mb-4 px-4 py-3 flex items-center justify-between">
           {/* Brand */}
           <a href="#home" className="flex items-center gap-3">
@@ -58,19 +61,37 @@ export default function Nav() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-2">
-            {links.map((l) => (
-              <a key={l.href} className="menu-link hidden md:inline-block" href={l.href}>
-                {l.label}
-              </a>
-            ))}
+            {links.map((l) => {
+              const isActive = activeId === l.id;
+              return (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="menu-link relative"
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="navActive"
+                      className="absolute inset-0 rounded-xl"
+                      style={{ background: "rgba(255,255,255,0.10)" }}
+                      transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.6 }}
+                    />
+                  )}
+                  <span className={isActive ? "relative z-10 text-white" : "relative z-10"}>
+                    {l.label}
+                  </span>
+                </a>
+              );
+            })}
             <div className="w-px h-6 bg-white/10 mx-1" />
-            <IconButton label="Instagram" href="https://instagram.com/kritik_paudel" external>
+            <IconButton label="Instagram" href="https://instagram.com/yourusername" external>
               <Instagram size={18} />
             </IconButton>
-            <IconButton label="LinkedIn" href="https://www.linkedin.com/in/kritik-paudel-6a159128a/" external>
+            <IconButton label="LinkedIn" href="https://linkedin.com/in/yourusername" external>
               <Linkedin size={18} />
             </IconButton>
-            <IconButton label="Email" href="mailto:kritikpaudel16@gmail.com">
+            <IconButton label="Email" href="mailto:hello@example.com">
               <Mail size={18} />
             </IconButton>
           </nav>
@@ -96,10 +117,7 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Dim background */}
             <div className="absolute inset-0 bg-black/50" />
-
-            {/* Panel */}
             <motion.div
               ref={panelRef}
               initial={{ x: "100%" }}
@@ -121,26 +139,38 @@ export default function Nav() {
               </div>
 
               <nav className="mt-2 flex flex-col">
-                {links.map((l) => (
-                  <a
-                    key={l.href}
-                    href={l.href}
-                    className="menu-link text-lg"
-                    onClick={() => setOpen(false)}
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {links.map((l) => {
+                  const isActive = activeId === l.id;
+                  return (
+                    <a
+                      key={l.href}
+                      href={l.href}
+                      className={`menu-link text-lg relative ${isActive ? "text-white" : ""}`}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => setOpen(false)}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="navActiveMobile"
+                          className="absolute inset-0 rounded-xl"
+                          style={{ background: "rgba(255,255,255,0.10)" }}
+                          transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.6 }}
+                        />
+                      )}
+                      <span className="relative z-10">{l.label}</span>
+                    </a>
+                  );
+                })}
               </nav>
 
               <div className="mt-auto pt-4 border-t border-white/10 flex items-center gap-2">
-                <IconButton label="Instagram" href="https://instagram.com/kritik_paudel" external>
+                <IconButton label="Instagram" href="https://instagram.com/yourusername" external>
                   <Instagram size={18} />
                 </IconButton>
-                <IconButton label="LinkedIn" href="https://www.linkedin.com/in/kritik-paudel-6a159128a/" external>
+                <IconButton label="LinkedIn" href="https://linkedin.com/in/yourusername" external>
                   <Linkedin size={18} />
                 </IconButton>
-                <IconButton label="Email" href="mailto:kritikpaudel16@gmail.com">
+                <IconButton label="Email" href="mailto:hello@example.com">
                   <Mail size={18} />
                 </IconButton>
               </div>
