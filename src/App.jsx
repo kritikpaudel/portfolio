@@ -10,10 +10,11 @@ import profile from "./assets/profile.jpg";
 import { Mail, MapPin, Github, Linkedin, Instagram } from "lucide-react";
 import ContactForm from "./components/ContactForm";
 import { GraduationCap, Briefcase } from "lucide-react";
-import UnderDevelopment from "./components/UnderDevelopment";
+
 import { fadeIn, stagger, scaleIn } from "./lib/motion";
-import CursorSpotlight from "./components/CursorSpotlight";
+
 import Magnetic from "./components/Magnetic";
+import WorkSection from "./components/WorkSection";
 
 
 function LenisProvider({ children }) {
@@ -59,10 +60,6 @@ export default function App() {
 
           </motion.div>
         </section>
-
-        
-
-
 
         {/* ABOUT */}
         <Section id="about" title="About" subtitle="A short description">
@@ -130,9 +127,12 @@ export default function App() {
         </Section>
 
         {/* WORK */}
+        
+
         <Section id="work" title="Work" subtitle="Selected projects & experiments">
-          <UnderDevelopment />
+          <WorkSection />
         </Section>
+
 
         {/* CONTACT */}
         <Section id="contact" title="Contact" subtitle="Let’s get connected">
