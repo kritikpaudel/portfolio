@@ -85,13 +85,13 @@ export default function Nav() {
               );
             })}
             <div className="w-px h-6 bg-white/10 mx-1" />
-            <IconButton label="Instagram" href="https://instagram.com/yourusername" external>
+            <IconButton label="Instagram" href="https://instagram.com/kritik_paudel" external>
               <Instagram size={18} />
             </IconButton>
-            <IconButton label="LinkedIn" href="https://linkedin.com/in/yourusername" external>
+            <IconButton label="LinkedIn" href="https://www.linkedin.com/in/kritik-paudel-6a159128a/" external>
               <Linkedin size={18} />
             </IconButton>
-            <IconButton label="Email" href="mailto:hello@example.com">
+            <IconButton label="Email" href="mailto:kritikpaudel69@gmail.com">
               <Mail size={18} />
             </IconButton>
           </nav>
