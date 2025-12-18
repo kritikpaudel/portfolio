@@ -91,7 +91,7 @@ export default function Nav() {
             <IconButton label="LinkedIn" href="https://www.linkedin.com/in/kritik-paudel-6a159128a/" external>
               <Linkedin size={18} />
             </IconButton>
-            <IconButton label="Email" href="mailto:kritikpaudel69@gmail.com">
+            <IconButton label="Email" href="mailto:kritikpaudel16@gmail.com">
               <Mail size={18} />
             </IconButton>
           </nav>
@@ -164,13 +164,13 @@ export default function Nav() {
               </nav>
 
               <div className="mt-auto pt-4 border-t border-white/10 flex items-center gap-2">
-                <IconButton label="Instagram" href="https://instagram.com/yourusername" external>
+                <IconButton label="Instagram" href="https://instagram.com/kritik_paudel" external>
                   <Instagram size={18} />
                 </IconButton>
-                <IconButton label="LinkedIn" href="https://linkedin.com/in/yourusername" external>
+                <IconButton label="LinkedIn" href="https://linkedin.com/in/kritik-paudel-6a159128a/" external>
                   <Linkedin size={18} />
                 </IconButton>
-                <IconButton label="Email" href="mailto:hello@example.com">
+                <IconButton label="Email" href="mailto:kritikpaudel16@gmail.com">
                   <Mail size={18} />
                 </IconButton>
               </div>
