@@ -6,7 +6,7 @@ import Nav from "./components/Nav";
 import Section from "./components/Section";
 import TiltCard from "./components/TiltCard";
 import EditablePortrait from "./components/EditablePortrait";
-import profile from "./assets/profile.jpg";
+import profile from "./assets/Profile.jpg";
 import { Mail, MapPin, Github, Linkedin, Instagram } from "lucide-react";
 import ContactForm from "./components/ContactForm";
 import { GraduationCap, Briefcase } from "lucide-react";
